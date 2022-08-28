@@ -256,8 +256,6 @@ Have a look at the discussion in [Different behaviour using the src_cpp or src_h
 6. [AVR128DB48-Curiosity-Nano-Hardware-User Guide](https://ww1.microchip.com/downloads/en/DeviceDoc/AVR128DB48-Curiosity-Nano-HW-UserG-DS50003037A.pdf)
 
 
-
-
 ### 2. Timer TCB0-TCB1
 
 TCB0-TCB1 are 16-bit timers
@@ -267,6 +265,20 @@ The ATtiny boards, such as `ATtiny3217`, `ATtiny1617`, will have only maximum 2 
 The ATtiny boards, such as `ATtiny817`, will have only maximum 1 TCB timer, (TCB0).
 
 The number of TCB timers will be automatically configured by the library.
+
+The following is the partial list of number of TCBs for each ATtiny board/chip
+
+#### TCB0-TCB1, TCA, TCD
+
+**ATtiny3217, ATtiny1617, ATtiny3216, ATtiny1616, ATtiny1614**
+
+#### TCB0, TCA, TCD
+
+**ATtinyx12, ATtinyx14, ATtinyx16, ATtinyx17, such as ATtiny817, ATtiny417, ATtiny816, etc.**
+
+#### TCB0, TCA, no TCD
+
+**ATtinyx02, ATtinyx04, ATtinyx06, ATtinyx07, such as ATtiny1607, ATtiny807, ATtiny1606, etc.**
 
 ---
 ---
