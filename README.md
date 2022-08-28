@@ -64,7 +64,7 @@
 
 ### Important Note for Arduino IDE
 
-With some Arduino IDE versions, such as v1.8.19, upload directly via USB to some boards, such as `AVR_CuriosityNano3217` can't be done without unknown-to-me fix. We'll get the following error when uploading
+With some Arduino IDE versions, such as v1.8.19, upload directly via USB to some boards, such as `AVR_CuriosityNano3217` can't be done without `unknown-to-me` fix. We'll get the following error when uploading
 
 ```
 avrdude: Version 6.3-20201216
@@ -91,7 +91,7 @@ the selected serial port
 
 We can use drag-and-drop method to `drag-and-drop` the compiled **hex** file to `CURIOSITY` virtual drive. 
 
-If `success`, The LED blinks **slowly** for 2 sec. The LED will blinks **rapidly** for 2 sec if `failure`
+If `success`, The LED blinks **slowly** for 2 sec, or **rapidly** for 2 sec if `failure`
 
 
 For example, to run [Change_Interval example](https://github.com/khoih-prog/ATtiny_Slow_PWM/tree/main/examples/Change_Interval), use Arduino IDE to compile, and get the `Change_Interval.ino.hex` file. For Ubuntu Linux, the file is stored in directory `/tmp/arduino_build_xxxxxx`
@@ -102,7 +102,7 @@ For example, to run [Change_Interval example](https://github.com/khoih-prog/ATti
 </p>
 
 
-After drag-and-drop the `Change_Interval.ino.hex` into `CURIOSITY` virtual drive, the code will run immidiately if successfully loaded (LED blinks **slowly**)
+After drag-and-drop the `Change_Interval.ino.hex` into `CURIOSITY` virtual drive, the code will run immediately if successfully loaded (LED blinks **slowly**)
 
 
 <p align="center">
@@ -117,23 +117,21 @@ After drag-and-drop the `Change_Interval.ino.hex` into `CURIOSITY` virtual drive
 
 ### Features
 
-This library enables you to use ISR-based PWM channels on Arduino AVR ATtiny-based boards (ATtiny3217, etc.) using [megaTinyCore](https://github.com/SpenceKonde/megaTinyCore), to create and output PWM any GPIO pin. Because this library doesn't use the powerful purely hardware-controlled PWM with many limitations, the maximum PWM frequency is currently limited at **1000Hz**, which is still suitable for many real-life applications. Now you can change the PWM settings on-the-fly
+This library enables you to use ISR-based PWM channels on Arduino AVR ATtiny-based boards (ATtiny3217, etc.) using [**megaTinyCore**](https://github.com/SpenceKonde/megaTinyCore), to create and output PWM any GPIO pin. Because this library doesn't use the powerful, high-speed, purely hardware-controlled PWM with **many limitations**, the maximum PWM frequency is currently limited at **1000Hz**, which is still suitable for many real-life applications, such as LED lighting, Servo, etc. Now you can change the PWM settings on-the-fly
 
 ---
 
-This library enables you to use Interrupt from Hardware Timers on AVR ATtiny-based boards to create and output PWM to pins. It now supports 64 ISR-based synchronized PWM channels, while consuming only 1 Hardware Timer. PWM interval can be very long (uint64_t microsecs / millisecs). The most important feature is they're ISR-based PWM channels. Therefore, their executions are not blocked by bad-behaving functions or tasks. This important feature is absolutely necessary for mission-critical tasks. These hardware PWM channels, using interrupt, still work even if other functions are blocking. Moreover, they are much more precise (certainly depending on clock frequency accuracy) than other software PWM using millis() or micros(). That's necessary if you need to measure some data requiring better accuracy.
+This library enables you to use Interrupt from Hardware Timers on **AVR ATtiny-based boards** to create and output PWM to any pins. It now supports 64 ISR-based synchronized PWM channels, while consuming only 1 Hardware Timer. PWM interval can be very long (uint64_t microsecs / millisecs). The most important feature is they're `ISR-based PWM` channels. Therefore, their executions are not blocked by bad-behaving functions or tasks. This important feature is absolutely necessary for `mission-critical` tasks. These hardware PWM channels, using interrupt, still work even if other functions are blocking. Moreover, they are much more precise (certainly depending on clock frequency accuracy) than other software PWM using millis() or micros(). That's necessary if you need to measure some data requiring better accuracy.
 
 As **Hardware Timers are rare, and very precious assets** of any board, this library now enables you to use up to **64 ISR-based synchronized PWM channels, while consuming only 1 Hardware Timer**. Timers' interval is very long (**ulong millisecs**).
 
-Now with these new **64 ISR-based PWM-channels**, the maximum interval is **practically unlimited** (limited only by unsigned long miliseconds) while **the accuracy is nearly perfect** compared to software PWM channels. 
+Now with these new **64 ISR-based PWM-channels**, the maximum interval is **practically unlimited** (limited only by `uint64_t` miliseconds) while **the accuracy is nearly perfect** compared to software PWM channels. 
 
-The most important feature is they're ISR-based PWM channels. Therefore, their executions are **not blocked by bad-behaving functions / tasks**. This important feature is absolutely necessary for mission-critical tasks. 
-
-The [**ISR_8_PWMs_Array_Complex**](examples/ISR_8_PWMs_Array_Complex) example will demonstrate the nearly perfect accuracy, compared to software PWM, by printing the actual period / duty-cycle in `microsecs` of each of PWM-channels.
-
-Being ISR-based PWM, their executions are not blocked by bad-behaving functions / tasks, such as connecting to WiFi, Internet or Blynk services. You can also have many `(up to 64)` PWM channels to use.
+The most important feature is they're `ISR-based PWM` channels. Therefore, their executions are **not blocked by bad-behaving functions / tasks**, such as connecting to WiFi, Internet or Blynk services. This important feature is absolutely necessary for mission-critical tasks. You can also have many `(up to 64)` PWM channels to use.
 
 This non-being-blocked important feature is absolutely necessary for mission-critical tasks.
+
+The [**ISR_8_PWMs_Array_Complex**](examples/ISR_8_PWMs_Array_Complex) example will demonstrate the nearly perfect accuracy, compared to software PWM, by printing the actual period / duty-cycle in `microsecs` of each of PWM-channels.
 
 You'll see `software-based` SimpleTimer is blocked while system is connecting to WiFi / Internet / Blynk, as well as by blocking task 
 in loop(), using delay() function as an example. The elapsed time then is very unaccurate
@@ -164,11 +162,13 @@ The catch is **your function is now part of an ISR (Interrupt Service Routine), 
 
 - **tinyAVR boards using megaTinyCore**
 
+##### Curiosity Nano ATtiny3217
+
 <p align="center">
     <img src="https://github.com/khoih-prog/ATtiny_TimerInterrupt/blob/main/pics/Curiosity_ATtiny3217.png">
 </p>
 
----
+
 ---
 
 
@@ -176,14 +176,10 @@ The catch is **your function is now part of an ISR (Interrupt Service Routine), 
 
 1. Inside the attached function, **delay() won’t work and the value returned by millis() will not increment.** Serial data received while in the function may be lost. You should declare as **volatile any variables that you modify within the attached function.**
 
-2. Typically global variables are used to pass data between an ISR and the main program. To make sure variables shared between an ISR and the main program are updated correctly, declare them as volatile.
+2. Typically global variables are used to pass data between an ISR and the main program. To make sure variables shared between an ISR and the main program are updated correctly, declare them as `volatile`.
 
 ---
 ---
-
-## Prerequisites
-
-## Prerequisites
 
 ## Prerequisites
 
