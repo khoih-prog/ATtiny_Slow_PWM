@@ -79,7 +79,7 @@
 
 volatile uint32_t startMicros = 0;
 
-// Init AT_TINY_SLOW_PWM, each can service max 48 different ISR-based PWM channels
+// Init AT_TINY_SLOW_PWM, each can service max 64 different ISR-based PWM channels
 AT_TINY_SLOW_PWM_ISR ISR_PWM;
 
 //////////////////////////////////////////////////////
