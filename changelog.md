@@ -19,7 +19,7 @@
 
 ### Initial Release v1.0.0
 
-1. Intial release to support Arduino **AVR ATtiny-based boards (ATtiny3217, etc.) using megaTinyCore**
+1. Initial release to support Arduino **AVR ATtiny-based boards (ATtiny3217, etc.) using megaTinyCore**
 
 
 

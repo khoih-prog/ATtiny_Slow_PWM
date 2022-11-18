@@ -125,7 +125,7 @@ This library enables you to use Interrupt from Hardware Timers on **AVR ATtiny-b
 
 As **Hardware Timers are rare, and very precious assets** of any board, this library now enables you to use up to **64 ISR-based synchronized PWM channels, while consuming only 1 Hardware Timer**. Timers' interval is very long (**ulong millisecs**).
 
-Now with these new **64 ISR-based PWM-channels**, the maximum interval is **practically unlimited** (limited only by `uint64_t` miliseconds) while **the accuracy is nearly perfect** compared to software PWM channels. 
+Now with these new **64 ISR-based PWM-channels**, the maximum interval is **practically unlimited** (limited only by `uint64_t` milliseconds) while **the accuracy is nearly perfect** compared to software PWM channels. 
 
 The most important feature is they're `ISR-based PWM` channels. Therefore, their executions are **not blocked by bad-behaving functions / tasks**, such as connecting to WiFi, Internet or Blynk services. This important feature is absolutely necessary for mission-critical tasks. You can also have many `(up to 64)` PWM channels to use.
 
@@ -133,8 +133,7 @@ This non-being-blocked important feature is absolutely necessary for mission-cri
 
 The [**ISR_8_PWMs_Array_Complex**](examples/ISR_8_PWMs_Array_Complex) example will demonstrate the nearly perfect accuracy, compared to software PWM, by printing the actual period / duty-cycle in `microsecs` of each of PWM-channels.
 
-You'll see `software-based` SimpleTimer is blocked while system is connecting to WiFi / Internet / Blynk, as well as by blocking task 
-in loop(), using delay() function as an example. The elapsed time then is very unaccurate
+You'll see `software-based` SimpleTimer is blocked while system is connecting to WiFi / Internet / Blynk, as well as by blocking task in loop(), using delay() function as an example. The elapsed time then is very unaccurate
 
 ---
 
