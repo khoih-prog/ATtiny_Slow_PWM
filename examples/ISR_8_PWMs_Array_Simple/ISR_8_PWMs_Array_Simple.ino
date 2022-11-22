@@ -5,7 +5,7 @@
 
   Built by Khoi Hoang https://github.com/khoih-prog/ATtiny_Slow_PWM
   Licensed under MIT license
-  
+
   Now even you use all these new 16 ISR-based timers,with their maximum interval practically unlimited (limited only by
   unsigned long miliseconds), you just consume only one AVRDx-based timer and avoid conflicting with other cores' tasks.
   The accuracy is nearly perfect compared to software timers. The most important feature is they're ISR-based timers
@@ -45,7 +45,7 @@
 #elif USE_TIMER_1
   #define CurrentTimer   ITimer1
 #else
-  #error You must select one Timer  
+  #error You must select one Timer
 #endif
 
 #define USING_MICROS_RESOLUTION       true  //false 
@@ -61,7 +61,7 @@
 
   // To modify according to your board
   // For Curiosity Nano ATtiny3217 => PIN_PA3
-  #if defined(ARDUINO_AVR_CuriosityNano3217) 
+  #if defined(ARDUINO_AVR_CuriosityNano3217)
     #define LED_BUILTIN   PIN_PA3
   #else
     // standard Arduino pin 13
@@ -83,7 +83,7 @@ AT_TINY_SLOW_PWM_ISR ISR_PWM;
 //////////////////////////////////////////////////////
 
 void TimerHandler()
-{ 
+{
   ISR_PWM.run();
 }
 
@@ -124,18 +124,23 @@ float PWM_DutyCycle[] =
 void setup()
 {
   Serial.begin(115200);
+
   while (!Serial && millis() < 5000);
 
-  Serial.print(F("\nStarting ISR_8_PWMs_Array_Simple on ")); Serial.println(BOARD_NAME);
+  Serial.print(F("\nStarting ISR_8_PWMs_Array_Simple on "));
+  Serial.println(BOARD_NAME);
   Serial.println(AT_TINY_SLOW_PWM_VERSION);
-  Serial.print(F("CPU Frequency = ")); Serial.print(F_CPU / 1000000); Serial.println(F(" MHz"));
-  Serial.print(F("Max number PWM channels = ")); Serial.println(MAX_NUMBER_CHANNELS);
+  Serial.print(F("CPU Frequency = "));
+  Serial.print(F_CPU / 1000000);
+  Serial.println(F(" MHz"));
+  Serial.print(F("Max number PWM channels = "));
+  Serial.println(MAX_NUMBER_CHANNELS);
 
-  Serial.print(F("TCB Clock Frequency = ")); 
+  Serial.print(F("TCB Clock Frequency = "));
 
-#if USING_FULL_CLOCK  
+#if USING_FULL_CLOCK
   Serial.println(F("Full clock (20/16MHz, etc) for highest accuracy"));
-#elif USING_HALF_CLOCK  
+#elif USING_HALF_CLOCK
   Serial.println(F("Half clock (10/8MHz, etc.) for high accuracy"));
 #else
   Serial.println(F("250KHz for lower accuracy but longer time"));
@@ -147,18 +152,20 @@ void setup()
 
   if (CurrentTimer.attachInterruptInterval(HW_TIMER_INTERVAL_MS, TimerHandler))
   {
-    Serial.print(F("Starting ITimer OK, micros() = ")); Serial.println(micros());
+    Serial.print(F("Starting ITimer OK, micros() = "));
+    Serial.println(micros());
   }
   else
     Serial.println(F("Can't set ITimer. Select another freq. or timer"));
-    
+
 #else
 
   CurrentTimer.init();
 
   if (CurrentTimer.attachInterrupt(HW_TIMER_INTERVAL_FREQ, TimerHandler))
   {
-    Serial.print(F("Starting ITimer OK, micros() = ")); Serial.println(micros());
+    Serial.print(F("Starting ITimer OK, micros() = "));
+    Serial.println(micros());
   }
   else
     Serial.println(F("Can't set ITimer. Select another freq. or timer"));

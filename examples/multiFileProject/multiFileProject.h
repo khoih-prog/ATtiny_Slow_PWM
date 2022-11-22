@@ -1,6 +1,6 @@
 /****************************************************************************************************************************
   multiFileProject.h
-  
+
   For Arduino AVR ATtiny-based boards (ATtiny3217, etc.) using megaTinyCore
   Written by Khoi Hoang
 

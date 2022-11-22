@@ -1,6 +1,6 @@
 /****************************************************************************************************************************
   multiFileProject.ino
-  
+
   For Arduino AVR ATtiny-based boards (ATtiny3217, etc.) using megaTinyCore
   Written by Khoi Hoang
 
@@ -23,24 +23,28 @@
 // To be included only in main(), .ino with setup() to avoid `Multiple Definitions` Linker Error
 #include "ATtiny_Slow_PWM.h"
 
-void setup() 
+void setup()
 {
   Serial.begin(115200);
+
   while (!Serial && millis() < 5000);
 
-  Serial.print(F("\nStarting multiFileProject on ")); Serial.println(BOARD_NAME);
+  Serial.print(F("\nStarting multiFileProject on "));
+  Serial.println(BOARD_NAME);
   Serial.println(AT_TINY_SLOW_PWM_VERSION);
 
 #if defined(AT_TINY_SLOW_PWM_VERSION_MIN)
+
   if (AT_TINY_SLOW_PWM_VERSION_INT < AT_TINY_SLOW_PWM_VERSION_MIN)
   {
     Serial.print("Warning. Must use this example on Version equal or later than : ");
     Serial.println(AT_TINY_SLOW_PWM_VERSION_MIN_TARGET);
   }
+
 #endif
 }
 
-void loop() 
+void loop()
 {
   // put your main code here, to run repeatedly:
 }

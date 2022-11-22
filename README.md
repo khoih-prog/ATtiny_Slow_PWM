@@ -6,8 +6,12 @@
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](#Contributing)
 [![GitHub issues](https://img.shields.io/github/issues/khoih-prog/ATtiny_Slow_PWM.svg)](http://github.com/khoih-prog/ATtiny_Slow_PWM/issues)
 
+
 <a href="https://www.buymeacoffee.com/khoihprog6" title="Donate to my libraries using BuyMeACoffee"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Donate to my libraries using BuyMeACoffee" style="height: 50px !important;width: 181px !important;" ></a>
 <a href="https://www.buymeacoffee.com/khoihprog6" title="Donate to my libraries using BuyMeACoffee"><img src="https://img.shields.io/badge/buy%20me%20a%20coffee-donate-orange.svg?logo=buy-me-a-coffee&logoColor=FFDD00" style="height: 20px !important;width: 200px !important;" ></a>
+<a href="https://profile-counter.glitch.me/khoih-prog/count.svg" title="Total khoih-prog Visitor count"><img src="https://profile-counter.glitch.me/khoih-prog/count.svg" style="height: 30px;width: 200px;"></a>
+<a href="https://profile-counter.glitch.me/khoih-prog-ATtiny_Slow_PWM/count.svg" title="ATtiny_Slow_PWM Visitor count"><img src="https://profile-counter.glitch.me/khoih-prog-ATtiny_Slow_PWM/count.svg" style="height: 30px;width: 200px;"></a>
+
 
 
 ---
@@ -98,7 +102,7 @@ For example, to run [Change_Interval example](https://github.com/khoih-prog/ATti
 
 
 <p align="center">
-    <img src="https://github.com/khoih-prog/ATtiny_Slow_PWM/blob/main/pics/Change_Interval.png">
+    <img src="https://github.com/khoih-prog/ATtiny_Slow_PWM/raw/main/pics/Change_Interval.png">
 </p>
 
 
@@ -106,7 +110,7 @@ After drag-and-drop the `Change_Interval.ino.hex` into `CURIOSITY` virtual drive
 
 
 <p align="center">
-    <img src="https://github.com/khoih-prog/ATtiny_Slow_PWM/blob/main/pics/CURIOSITY_drive.png">
+    <img src="https://github.com/khoih-prog/ATtiny_Slow_PWM/raw/main/pics/CURIOSITY_drive.png">
 </p>
 
 
@@ -164,7 +168,7 @@ The catch is **your function is now part of an ISR (Interrupt Service Routine), 
 ##### Curiosity Nano ATtiny3217
 
 <p align="center">
-    <img src="https://github.com/khoih-prog/ATtiny_TimerInterrupt/blob/main/pics/Curiosity_ATtiny3217.png">
+    <img src="https://github.com/khoih-prog/ATtiny_TimerInterrupt/raw/main/pics/Curiosity_ATtiny3217.png">
 </p>
 
 
@@ -183,7 +187,7 @@ The catch is **your function is now part of an ISR (Interrupt Service Routine), 
 ## Prerequisites
 
 1. [`Arduino IDE 1.8.19+` for Arduino](https://github.com/arduino/Arduino). [![GitHub release](https://img.shields.io/github/release/arduino/Arduino.svg)](https://github.com/arduino/Arduino/releases/latest)
-2. [`SpenceKonde megaTinyCore core 2.5.11+`](https://github.com/SpenceKonde/megaTinyCore) for Arduino ATtiny boards.  [![GitHub release](https://img.shields.io/github/release/SpenceKonde/megaTinyCore.svg)](https://github.com/SpenceKonde/megaTinyCore/releases/latest). Follow [**megaTinyCore Installation**](https://github.com/SpenceKonde/megaTinyCore/blob/master/Installation.md).
+2. [`SpenceKonde megaTinyCore core 2.6.4+`](https://github.com/SpenceKonde/megaTinyCore) for Arduino ATtiny boards.  [![GitHub release](https://img.shields.io/github/release/SpenceKonde/megaTinyCore.svg)](https://github.com/SpenceKonde/megaTinyCore/releases/latest). Follow [**megaTinyCore Installation**](https://github.com/SpenceKonde/megaTinyCore/blob/master/Installation.md).
 3. To use with certain example
    - [`SimpleTimer library`](https://github.com/jfturcot/SimpleTimer) for [ISR_8_PWMs_Array_Simple](examples/ISR_8_PWMs_Array_Simple) and [ISR_8_PWMs_Array_Complex](examples/ISR_8_PWMs_Array_Complex) examples.
    
@@ -224,14 +228,14 @@ The current library implementation, using `xyz-Impl.h` instead of standard `xyz.
 
 You can include this `.hpp` file
 
-```
+```cpp
 // Can be included as many times as necessary, without `Multiple Definitions` Linker Error
 #include "ATtiny_Slow_PWM.hpp"          //https://github.com/khoih-prog/ATtiny_Slow_PWM
 ```
 
 in many files. But be sure to use the following `.h` file **in just 1 `.h`, `.cpp` or `.ino` file**, which must **not be included in any other file**, to avoid `Multiple Definitions` Linker Error
 
-```
+```cpp
 // To be included only in main(), .ino with setup() to avoid `Multiple Definitions` Linker Error
 #include "ATtiny_Slow_PWM.h"            //https://github.com/khoih-prog/ATtiny_Slow_PWM
 ```
@@ -290,7 +294,7 @@ Before using any Timer, you have to make sure the Timer has not been used by any
 
 #### 1. Init Hardware Timer
 
-```
+```cpp
 // Select USING_FULL_CLOCK      == true for  20/16MHz to Timer TCBx => shorter timer, but better accuracy
 // Select USING_HALF_CLOCK      == true for  10/ 8MHz to Timer TCBx => shorter timer, but better accuracy
 // Select USING_250KHZ          == true for 250KHz to Timer TCBx => longer timer,  but worse  accuracy
@@ -320,7 +324,7 @@ AT_TINY_SLOW_PWM_ISR ISR_PWM;
 
 #### 2. Set PWM Frequency, dutycycle, attach irqCallbackStartFunc and irqCallbackStopFunc functions
 
-```
+```cpp
 void irqCallbackStartFunc()
 {
 
@@ -373,7 +377,7 @@ https://github.com/khoih-prog/ATtiny_Slow_PWM/blob/137d892c07ae02b04dcc86b4dfeb2
 The following is the sample terminal output when running example [ISR_8_PWMs_Array_Complex](examples/ISR_8_PWMs_Array_Complex) **Curiosity Nano AVR_ATtiny3217** to demonstrate how to use multiple PWM channels with complex callback functions, the accuracy of ISR Hardware PWM-channels, **especially when system is very busy**.  The ISR PWM-channels is **running exactly according to corresponding programmed periods and duty-cycles**
 
 
-```
+```cpp
 Starting ISR_8_PWMs_Array_Complex on AVR_ATtiny3217
 ATtiny_Slow_PWM v1.0.0
 CPU Frequency = 20 MHz
@@ -424,7 +428,7 @@ PWM Channel : 7, prog Period (ms): 125.00, actual : 125062, prog DutyCycle : 55,
 
 The following is the sample terminal output when running example [**ISR_8_PWMs_Array**](examples/ISR_8_PWMs_Array) on **AVR_ATtiny3217** to demonstrate how to use multiple PWM channels with simple callback functions.
 
-```
+```cpp
 Starting ISR_8_PWMs_Array on AVR_ATtiny3217
 ATtiny_Slow_PWM v1.0.0
 CPU Frequency = 20 MHz
@@ -447,7 +451,7 @@ Starting ITimer OK, micros() = 14778
 
 The following is the sample terminal output when running example [**ISR_8_PWMs_Array_Simple**](examples/ISR_8_PWMs_Array_Simple) on **AVR_ATtiny3217** to demonstrate how to use multiple PWM channels.
 
-```
+```cpp
 Starting ISR_8_PWMs_Array_Simple on AVR_ATtiny3217
 ATtiny_Slow_PWM v1.0.0
 CPU Frequency = 20 MHz
@@ -470,7 +474,7 @@ Starting ITimer OK, micros() = 15609
 
 The following is the sample terminal output when running example [ISR_Modify_PWM](examples/ISR_Modify_PWM) on **AVR_ATtiny3217** to demonstrate how to modify PWM settings on-the-fly without deleting the PWM channel
 
-```
+```cpp
 Starting ISR_Modify_PWM on AVR_ATtiny3217
 ATtiny_Slow_PWM v1.0.0
 CPU Frequency = 20 MHz
@@ -504,7 +508,7 @@ Modify Freq => 2.00, DC => 10.00
 
 The following is the sample terminal output when running example [ISR_Changing_PWM](examples/ISR_Changing_PWM) on **AVR_ATtiny3217** to demonstrate how to modify PWM settings on-the-fly by deleting the PWM channel and reinit the PWM channel
 
-```
+```cpp
 Starting ISR_Changing_PWM on AVR_ATtiny3217
 ATtiny_Slow_PWM v1.0.0
 CPU Frequency = 20 MHz
@@ -628,6 +632,6 @@ If you want to contribute to this project:
 
 ## Copyright
 
-Copyright 2022- Khoi Hoang
+Copyright (c) 2022- Khoi Hoang
 
 

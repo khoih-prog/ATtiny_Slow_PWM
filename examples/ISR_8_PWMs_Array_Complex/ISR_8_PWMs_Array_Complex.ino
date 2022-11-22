@@ -5,7 +5,7 @@
 
   Built by Khoi Hoang https://github.com/khoih-prog/ATtiny_Slow_PWM
   Licensed under MIT license
-  
+
   Now even you use all these new 16 ISR-based timers,with their maximum interval practically unlimited (limited only by
   unsigned long miliseconds), you just consume only one AVRDx-based timer and avoid conflicting with other cores' tasks.
   The accuracy is nearly perfect compared to software timers. The most important feature is they're ISR-based timers
@@ -45,7 +45,7 @@
 #elif USE_TIMER_1
   #define CurrentTimer   ITimer1
 #else
-  #error You must select one Timer  
+  #error You must select one Timer
 #endif
 
 #define USING_MICROS_RESOLUTION       true  //false 
@@ -63,7 +63,7 @@
 
   // To modify according to your board
   // For Curiosity Nano ATtiny3217 => PIN_PA3
-  #if defined(ARDUINO_AVR_CuriosityNano3217) 
+  #if defined(ARDUINO_AVR_CuriosityNano3217)
     #define LED_BUILTIN   PIN_PA3
   #else
     // standard Arduino pin 13
@@ -346,42 +346,52 @@ void simpleTimerDoingSomething2s()
 
   unsigned long currMicros = micros();
 
-  Serial.print(F("SimpleTimer (us): ")); Serial.print(SIMPLE_TIMER_MS);
-  Serial.print(F(", us : ")); Serial.print(currMicros);
-  Serial.print(F(", Dus : ")); Serial.println(currMicros - previousMicrosStart);
+  Serial.print(F("SimpleTimer (us): "));
+  Serial.print(SIMPLE_TIMER_MS);
+  Serial.print(F(", us : "));
+  Serial.print(currMicros);
+  Serial.print(F(", Dus : "));
+  Serial.println(currMicros - previousMicrosStart);
 
   for (uint16_t i = 0; i < NUMBER_ISR_PWMS; i++)
   {
 #if USE_COMPLEX_STRUCT
-    Serial.print(F("PWM Channel : ")); Serial.print(i);
+    Serial.print(F("PWM Channel : "));
+    Serial.print(i);
     Serial.print(F(", prog Period (ms): "));
 
     Serial.print(1000.f / curISR_PWM_Data[i].PWM_Freq);
 
-    Serial.print(F(", actual : ")); Serial.print((uint32_t) curISR_PWM_Data[i].deltaMicrosStart);
+    Serial.print(F(", actual : "));
+    Serial.print((uint32_t) curISR_PWM_Data[i].deltaMicrosStart);
 
     Serial.print(F(", prog DutyCycle : "));
 
     Serial.print(curISR_PWM_Data[i].PWM_DutyCycle);
 
-    Serial.print(F(", actual : ")); Serial.println((float) curISR_PWM_Data[i].deltaMicrosStop * 100.0f / curISR_PWM_Data[i].deltaMicrosStart);
+    Serial.print(F(", actual : "));
+    Serial.println((float) curISR_PWM_Data[i].deltaMicrosStop * 100.0f / curISR_PWM_Data[i].deltaMicrosStart);
     //Serial.print(F(", actual deltaMicrosStop : ")); Serial.println(curISR_PWM_Data[i].deltaMicrosStop);
     //Serial.print(F(", actual deltaMicrosStart : ")); Serial.println(curISR_PWM_Data[i].deltaMicrosStart);
 
 #else
 
-    Serial.print(F("PWM Channel : ")); Serial.print(i);
+    Serial.print(F("PWM Channel : "));
+    Serial.print(i);
 
     Serial.print(1000 / PWM_Freq[i]);
 
-    Serial.print(F(", prog. Period (us): ")); Serial.print(PWM_Period[i]);
-    Serial.print(F(", actual : ")); Serial.print(deltaMicrosStart[i]);
+    Serial.print(F(", prog. Period (us): "));
+    Serial.print(PWM_Period[i]);
+    Serial.print(F(", actual : "));
+    Serial.print(deltaMicrosStart[i]);
 
     Serial.print(F(", prog DutyCycle : "));
 
     Serial.print(PWM_DutyCycle[i]);
 
-    Serial.print(F(", actual : ")); Serial.println( (float) deltaMicrosStop[i] * 100.0f / deltaMicrosStart[i]);
+    Serial.print(F(", actual : "));
+    Serial.println( (float) deltaMicrosStop[i] * 100.0f / deltaMicrosStart[i]);
     //Serial.print(F(", actual deltaMicrosStop : ")); Serial.println(deltaMicrosStop[i]);
     //Serial.print(F(", actual deltaMicrosStart : ")); Serial.println(deltaMicrosStart[i]);
 #endif
@@ -393,18 +403,23 @@ void simpleTimerDoingSomething2s()
 void setup()
 {
   Serial.begin(115200);
+
   while (!Serial && millis() < 5000);
 
-  Serial.print(F("\nStarting ISR_8_PWMs_Array_Complex on ")); Serial.println(BOARD_NAME);
+  Serial.print(F("\nStarting ISR_8_PWMs_Array_Complex on "));
+  Serial.println(BOARD_NAME);
   Serial.println(AT_TINY_SLOW_PWM_VERSION);
-  Serial.print(F("CPU Frequency = ")); Serial.print(F_CPU / 1000000); Serial.println(F(" MHz"));
-  Serial.print(F("Max number PWM channels = ")); Serial.println(MAX_NUMBER_CHANNELS);
+  Serial.print(F("CPU Frequency = "));
+  Serial.print(F_CPU / 1000000);
+  Serial.println(F(" MHz"));
+  Serial.print(F("Max number PWM channels = "));
+  Serial.println(MAX_NUMBER_CHANNELS);
 
-  Serial.print(F("TCB Clock Frequency = ")); 
+  Serial.print(F("TCB Clock Frequency = "));
 
-#if USING_FULL_CLOCK  
+#if USING_FULL_CLOCK
   Serial.println(F("Full clock (20/16MHz, etc) for highest accuracy"));
-#elif USING_HALF_CLOCK  
+#elif USING_HALF_CLOCK
   Serial.println(F("Half clock (10/8MHz, etc.) for high accuracy"));
 #else
   Serial.println(F("250KHz for lower accuracy but longer time"));
@@ -416,18 +431,20 @@ void setup()
 
   if (CurrentTimer.attachInterruptInterval(HW_TIMER_INTERVAL_MS, TimerHandler))
   {
-    Serial.print(F("Starting ITimer OK, micros() = ")); Serial.println(micros());
+    Serial.print(F("Starting ITimer OK, micros() = "));
+    Serial.println(micros());
   }
   else
     Serial.println(F("Can't set ITimer. Select another freq. or timer"));
-    
+
 #else
 
   CurrentTimer.init();
 
   if (CurrentTimer.attachInterrupt(HW_TIMER_INTERVAL_FREQ, TimerHandler))
   {
-    Serial.print(F("Starting ITimer OK, micros() = ")); Serial.println(micros());
+    Serial.print(F("Starting ITimer OK, micros() = "));
+    Serial.println(micros());
   }
   else
     Serial.println(F("Can't set ITimer. Select another freq. or timer"));
