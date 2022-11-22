@@ -36,7 +36,7 @@ If applicable, add screenshots to help explain your problem.
 Please ensure to specify the following:
 
 * Arduino IDE version (e.g. 1.8.19) or Platform.io version
-* `megaTinyCore` Core Version (e.g. megaTinyCore core v2.5.11)
+* `megaTinyCore` Core Version (e.g. megaTinyCore core v2.6.4)
 * Board (e.g. AVR_CuriosityNano3217, etc.)
 * Contextual information (e.g. what you were trying to achieve)
 * Simplest possible steps to reproduce
@@ -49,13 +49,13 @@ Please ensure to specify the following:
 
 ```
 Arduino IDE version: 1.8.19
-Arduino megaTinyCore core v2.5.11
+Arduino megaTinyCore core v2.6.4
 OS: Ubuntu 20.04 LTS
 Board: AVR_CuriosityNano3217
-Linux xy-Inspiron-3593 5.15.0-46-generic #49~20.04.1-Ubuntu SMP Thu Aug 4 19:15:44 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
+Linux xy-Inspiron-3593 5.15.0-53-generic #59~20.04.1-Ubuntu SMP Thu Oct 20 15:10:22 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
 
 Context:
-I encountered an endless loop while trying to connect to Local WiFi.
+I encountered a crash while using this library
 
 Steps to reproduce:
 1. ...
@@ -64,6 +64,31 @@ Steps to reproduce:
 4. ...
 ```
 
-### Additional context
+---
 
-Add any other context about the problem here.
+### Sending Feature Requests
+
+Feel free to post feature requests. It's helpful if you can explain exactly why the feature would be useful.
+
+There are usually some outstanding feature requests in the [existing issues list](https://github.com/khoih-prog/ATtiny_Slow_PWM/issues?q=is%3Aopen+is%3Aissue+label%3Aenhancement), feel free to add comments to them.
+
+---
+
+### Sending Pull Requests
+
+Pull Requests with changes and fixes are also welcome!
+
+Please use the `astyle` to reformat the updated library code as follows (demo for Ubuntu Linux)
+
+1. Change directory to the library GitHub
+
+```
+xy@xy-Inspiron-3593:~$ cd Arduino/xy/ATtiny_Slow_PWM_GitHub/
+xy@xy-Inspiron-3593:~/Arduino/xy/ATtiny_Slow_PWM_GitHub$
+```
+
+2. Issue astyle command
+
+```
+xy@xy-Inspiron-3593:~/Arduino/xy/ATtiny_Slow_PWM_GitHub$ bash utils/restyle.sh
+```
